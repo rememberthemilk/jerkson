@@ -1,4 +1,4 @@
-package com.codahale.jerkson.tests
+ package com.codahale.jerkson.tests
 
 import org.codehaus.jackson.JsonNode
 import org.codehaus.jackson.annotate.{JsonIgnoreProperties, JsonIgnore}

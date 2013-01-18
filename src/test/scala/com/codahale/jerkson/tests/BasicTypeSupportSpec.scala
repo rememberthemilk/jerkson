@@ -1,6 +1,6 @@
 package com.codahale.jerkson.tests
 
-import com.codahale.simplespec.Spec
+import com.simple.simplespec.Spec
 import com.codahale.jerkson.Json._
 import org.codehaus.jackson.node.IntNode
 import org.codehaus.jackson.JsonNode
