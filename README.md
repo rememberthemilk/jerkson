@@ -1,40 +1,13 @@
 Jerkson
 -------
 
-*Because I think you should use JSON.*
-
-Jerkson is a Scala wrapper for [Jackson](http://jackson.codehaus.org/) which
-brings Scala's ease-of-use to Jackson's features.
-
+Forked from https://github.com/codahale/jerkson to apply some fixes and compile to Scala 2.10.
 
 Requirements
 ------------
 
-* Scala 2.8.2 or 2.9.1
+* Scala 2.10
 * Jackson 1.9.x
-
-
-Setting Up Your Project
------------------------
-
-Go ahead and add Jerkson as a dependency:
-
-```xml
-<repositories>
-  <repository>
-    <id>repo.codahale.com</id>
-    <url>http://repo.codahale.com</url>
-  </repository>
-</repositories>
-
-<dependencies>
-  <dependency>
-    <groupId>com.codahale</groupId>
-    <artifactId>jerkson_${scala.version}</artifactId>
-    <version>0.5.0</version>
-  </dependency>
-</dependencies>
-```
 
 
 Parsing JSON
