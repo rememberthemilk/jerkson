@@ -9,7 +9,7 @@ import scala.collection.generic.{MapFactory, GenericCompanion}
 class ScalaDeserializers(classLoader: ClassLoader) extends Deserializers.Base {
   override def findBeanDeserializer(javaType: JavaType, config: DeserializationConfig,
                             provider: DeserializerProvider, beanDesc: BeanDescription,
-                            property: BeanProperty) = {
+                            property: BeanProperty):JsonDeserializer[_] = {
     val klass = javaType.getRawClass
     if (klass == classOf[Range] || klass == classOf[immutable.Range]) {
       new RangeDeserializer

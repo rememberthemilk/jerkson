@@ -5,8 +5,8 @@ import org.codehaus.jackson.map.{SerializerProvider, JsonSerializer}
 import org.codehaus.jackson.map.annotate.JsonCachable
 
 @JsonCachable
-class IterableSerializer extends JsonSerializer[Iterable[_]] {
-  def serialize(value: Iterable[_], json: JsonGenerator, provider: SerializerProvider) {
+class IterableSerializer extends JsonSerializer[Iterable[Any]] {
+  def serialize(value: Iterable[Any], json: JsonGenerator, provider: SerializerProvider) {
     json.writeStartArray()
     for (element <- value) {
       provider.defaultSerializeValue(element, json)
