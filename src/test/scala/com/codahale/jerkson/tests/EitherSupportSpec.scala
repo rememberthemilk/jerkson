@@ -3,7 +3,7 @@ package com.codahale.jerkson.tests
 import org.specs2.mutable._
 import com.codahale.jerkson.Json._
 import com.codahale.jerkson.ParsingException
-import org.codehaus.jackson.node.IntNode
+import com.fasterxml.jackson.databind.node.IntNode
 
 class EitherSupportSpec extends Specification {
   "An Either of two case classes" should {

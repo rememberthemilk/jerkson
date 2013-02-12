@@ -52,7 +52,7 @@ class EdgeCaseSpec extends Specification {
   "Parsing an empty document" should {
     "should throw a ParsingException with an informative message" in {
       val input = new ByteArrayInputStream(Array.empty)
-      parse[CaseClass](input).must(throwA[ParsingException]("JSON document ended unexpectedly."))
+      parse[CaseClass](input).must(throwA[ParsingException]("No content to map due to end\\-of\\-input\n"))
     }
   }
 }

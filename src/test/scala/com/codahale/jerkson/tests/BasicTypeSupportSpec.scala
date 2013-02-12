@@ -2,8 +2,8 @@ package com.codahale.jerkson.tests
 
 import org.specs2.mutable._
 import com.codahale.jerkson.Json._
-import org.codehaus.jackson.node.IntNode
-import org.codehaus.jackson.JsonNode
+import com.fasterxml.jackson.databind.node.IntNode
+import com.fasterxml.jackson.databind.JsonNode
 
 class BasicTypeSupportSpec extends Specification {
   "A Byte" should {
