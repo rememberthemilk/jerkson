@@ -29,13 +29,12 @@ class EdgeCaseSpec extends Specification {
   "Parsing malformed JSON" should {
     "should throw a ParsingException with an informative message" in {
       parse[Boolean]("jjf8;09").must(throwA[ParsingException](
-            "Malformed JSON. Unexpected character \\('j' \\(code 106\\)\\): expected a " +
-                    "valid value \\(number, String, array, object, 'true', 'false' " +
-                    "or 'null'\\) at character offset 0."))
+            "Malformed JSON. Unrecognized token 'jjf8': was expecting \\('true', 'false' or 'null'\\) at character offset 4."
+      ))
 
       parse[CaseClass]("{\"ye\":1").must(throwA[ParsingException](
             "Malformed JSON. Unexpected end-of-input: expected close marker for " +
-                    "OBJECT at character offset 20."))
+                    "OBJECT at character offset 21."))
     }
   }
 

@@ -13,7 +13,7 @@ class EitherDeserializer(config: DeserializationConfig,
     try {
       Left(tp.getCodec.readValue[Object](tp, javaType.containedType(0)))
     } catch {
-      case _ => {
+      case _:Exception => {
         // We don't want to reuse the same parser that was used in the
         // try-block, as the read there may have used nextToken() and advanced
         // us past the point where we expect to be.
