@@ -1,13 +1,13 @@
 Jerkson
 -------
 
-Forked from https://github.com/codahale/jerkson to apply some fixes and compile to Scala 2.10.
+Forked from https://github.com/codahale/jerkson to apply some fixes and compile to Scala 2.11.
 
 Requirements
 ------------
 
-* Scala 2.10
-* Jackson 1.9.x
+* Scala 2.11
+* Jackson 2.5.x
 
 
 Parsing JSON

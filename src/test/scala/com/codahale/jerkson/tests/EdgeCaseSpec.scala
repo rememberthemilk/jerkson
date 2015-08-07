@@ -42,7 +42,7 @@ class EdgeCaseSpec extends Specification {
     "should throw a ParsingException with an informative message" in {
       parse[CaseClass]("900").must(throwA[ParsingException](
         ("""Can not deserialize instance of com.codahale.jerkson.tests.CaseClass out of VALUE_NUMBER_INT token\n""" +
-          """ at \[Source: java.io.StringReader@[0-9a-f]+; line: 1, column: 1\]""")))
+          """ at \[Source: 900; line: 1, column: 1\]""")))
 
       parse[CaseClass]("{\"woo\": 1}").must(throwA[ParsingException]("""Invalid JSON. Needed \[id, name\], but found \[woo\]."""))
     }

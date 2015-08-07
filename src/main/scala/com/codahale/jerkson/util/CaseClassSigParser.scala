@@ -16,6 +16,7 @@ class MissingExpectedType(clazz: Class[_]) extends Error(
 object CaseClassSigParser {
   val SCALA_SIG = "ScalaSig"
   val SCALA_SIG_ANNOTATION = "Lscala/reflect/ScalaSignature;"
+  val SCALA_LONG_SIG_ANNOTATION = "Lscala/reflect/ScalaLongSignature;"
   val BYTES_VALUE = "bytes"
 
   private def parseClassFileFromByteCode(clazz: Class[_]): Option[ClassFile] = try {
@@ -109,8 +110,8 @@ object CaseClassSigParser {
         factory.constructType(array.getClass)
       } else {
         val klass = loadClass(ref.symbol.path, classLoader)
-        factory.constructParametricType(
-          klass, ref.typeArgs.map {
+        factory.constructParametrizedType(
+          klass, klass, ref.typeArgs.map {
             t => typeRef2JavaType(t.asInstanceOf[TypeRefType], factory, classLoader)
           }: _*
         )

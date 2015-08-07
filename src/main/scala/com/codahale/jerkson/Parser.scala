@@ -12,32 +12,32 @@ trait Parser extends Factory {
   /**
    * Parse a JSON string as a particular type.
    */
-  def parse[A](input: String)(implicit mf: Manifest[A]): A = parse[A](factory.createJsonParser(input), mf)
+  def parse[A](input: String)(implicit mf: Manifest[A]): A = parse[A](factory.createParser(input), mf)
 
   /**
    * Parse a JSON input stream as a particular type.
    */
-  def parse[A](input: InputStream)(implicit mf: Manifest[A]): A = parse[A](factory.createJsonParser(input), mf)
+  def parse[A](input: InputStream)(implicit mf: Manifest[A]): A = parse[A](factory.createParser(input), mf)
 
   /**
    * Parse a JSON file as a particular type.
    */
-  def parse[A](input: File)(implicit mf: Manifest[A]): A = parse[A](factory.createJsonParser(input), mf)
+  def parse[A](input: File)(implicit mf: Manifest[A]): A = parse[A](factory.createParser(input), mf)
 
   /**
    * Parse a JSON URL as a particular type.
    */
-  def parse[A](input: URL)(implicit mf: Manifest[A]): A = parse[A](factory.createJsonParser(input), mf)
+  def parse[A](input: URL)(implicit mf: Manifest[A]): A = parse[A](factory.createParser(input), mf)
 
   /**
    * Parse a JSON Reader as a particular type.
    */
-  def parse[A](input: Reader)(implicit mf: Manifest[A]): A = parse[A](factory.createJsonParser(input), mf)
+  def parse[A](input: Reader)(implicit mf: Manifest[A]): A = parse[A](factory.createParser(input), mf)
 
   /**
    * Parse a JSON byte array as a particular type.
    */
-  def parse[A](input: Array[Byte])(implicit mf: Manifest[A]): A = parse[A](factory.createJsonParser(input), mf)
+  def parse[A](input: Array[Byte])(implicit mf: Manifest[A]): A = parse[A](factory.createParser(input), mf)
 
   /**
    * Parse a JSON Source as a particular type.
@@ -57,7 +57,7 @@ trait Parser extends Factory {
    * of the elements of the stream.
    */
   def stream[A](input: InputStream)(implicit mf: Manifest[A]): Iterator[A] = {
-    val parser = factory.createJsonParser(input)
+    val parser = factory.createParser(input)
     new StreamingIterator[A](parser, mf)
   }
 
@@ -66,7 +66,7 @@ trait Parser extends Factory {
    * of the elements of the stream.
    */
   def stream[A](input: Reader)(implicit mf: Manifest[A]): Iterator[A] = {
-    val parser = factory.createJsonParser(input)
+    val parser = factory.createParser(input)
     new StreamingIterator[A](parser, mf)
   }
 
@@ -77,7 +77,7 @@ trait Parser extends Factory {
 
   private[jerkson] def parse[A](parser: JsonParser, mf: Manifest[A]): A = {
     try {
-      if (mf.erasure == classOf[JValue] || mf.erasure == JNull.getClass) {
+      if (mf.runtimeClass == classOf[JValue] || mf.runtimeClass == JNull.getClass) {
         val value: A = parser.getCodec.readValue(parser, Types.build(mapper.getTypeFactory, mf))
         if (value == null) JNull.asInstanceOf[A] else value
       } else {
