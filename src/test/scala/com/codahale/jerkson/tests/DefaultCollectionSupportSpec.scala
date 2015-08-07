@@ -36,27 +36,27 @@ class DefaultCollectionSupportSpec extends Specification {
 
   }
 
-  "A Pair[Int]" should {
+  "A Tuple2[Int]" should {
     "generates a two-element JSON array of ints" in {
       // TODO: 5/31/11 <coda> -- fix Pair serialization
-      generate(Pair(1, 2)).must_==("[1,2]")
+      generate((1, 2)).must_==("[1,2]")
     }.pendingUntilFixed("FIXME")
 
     "is parsable from a two-element JSON array of ints" in {
       // TODO: 5/31/11 <coda> -- fix Pair deserialization
-      parse[Pair[Int, Int]]("[1,2]").must_==(Pair(1, 2))
+      parse[(Int, Int)]("[1,2]").must_==((1, 2))
     }.pendingUntilFixed("FIXME")
   }
 
-  "A Triple[Int]" should {
+  "A Tuple3[Int]" should {
     "generates a three-element JSON array of ints" in {
       // TODO: 5/31/11 <coda> -- fix Triple serialization
-      generate(Triple(1, 2, 3)).must_==("[1,2,3]")
+      generate((1, 2, 3)).must_==("[1,2,3]")
     }.pendingUntilFixed("FIXME")
 
     "is parsable from a three-element JSON array of ints" in {
       // TODO: 5/31/11 <coda> -- fix Triple deserialization
-      parse[Triple[Int, Int, Int]]("[1,2,3]").must_==(Triple(1, 2, 3))
+      parse[(Int, Int, Int)]("[1,2,3]").must_==((1, 2, 3))
     }.pendingUntilFixed("FIXME")
   }
 
