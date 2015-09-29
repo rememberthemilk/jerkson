@@ -6,7 +6,7 @@ scalaVersion := "2.11.7"
 
 version := "0.5.2-SNAPSHOT"
 
-val jacksonVersion = "2.5.4"
+val jacksonVersion = "2.6.2"
 
 libraryDependencies ++= Seq(
   "com.fasterxml.jackson.core" % "jackson-annotations" % jacksonVersion,

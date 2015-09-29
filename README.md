@@ -7,7 +7,7 @@ Requirements
 ------------
 
 * Scala 2.11
-* Jackson 2.5.x
+* Jackson 2.6.x
 
 
 Parsing JSON
