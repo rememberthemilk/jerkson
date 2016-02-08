@@ -2,6 +2,7 @@ package com.codahale.jerkson
 
 import com.fasterxml.jackson.databind.{MappingJsonFactory, ObjectMapper}
 import com.fasterxml.jackson.core.{JsonGenerator, JsonParser => JacksonParser}
+import com.fasterxml.jackson.module.afterburner.AfterburnerModule
 
 object Json extends Json
 
@@ -9,6 +10,7 @@ trait Json extends Parser with Generator {
   protected val classLoader = Thread.currentThread().getContextClassLoader
 
   protected val mapper = new ObjectMapper
+  mapper.registerModule(new AfterburnerModule())
   mapper.registerModule(new ScalaModule(classLoader))
 
   protected val factory = new MappingJsonFactory(mapper)
