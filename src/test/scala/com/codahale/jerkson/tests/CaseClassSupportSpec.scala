@@ -26,7 +26,7 @@ class CaseClassSupportSpec extends Specification {
 
   "A case class with lazy fields" should {
     "generates a JSON object with those fields evaluated" in {
-      generate(CaseClassWithLazyVal(1)).must_==("""{"id":1,"woo":"yeah"}""")
+      generate(CaseClassWithLazyVal(1)).must_==("""{"woo":"yeah","id":1}""")
     }
 
     "is parsable from a JSON object without those fields" in {

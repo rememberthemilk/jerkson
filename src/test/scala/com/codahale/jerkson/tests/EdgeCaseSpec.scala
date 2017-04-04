@@ -33,8 +33,8 @@ class EdgeCaseSpec extends Specification {
       ))
 
       parse[CaseClass]("{\"ye\":1").must(throwA[ParsingException](
-            "Malformed JSON. Unexpected end-of-input: expected close marker for " +
-                    "OBJECT at character offset 21."))
+            """Malformed JSON\. Unexpected end-of-input: expected close marker for """ + 
+                    """Object \(start marker at \[Source: \{\"ye\":1; line: 1, column: 1\]\) at character offset 21\."""))
     }
   }
 
