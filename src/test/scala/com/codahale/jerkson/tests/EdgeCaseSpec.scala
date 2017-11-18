@@ -34,15 +34,15 @@ class EdgeCaseSpec extends Specification {
 
       parse[CaseClass]("{\"ye\":1").must(throwA[ParsingException](
             """Malformed JSON\. Unexpected end-of-input: expected close marker for """ + 
-                    """Object \(start marker at \[Source: \{\"ye\":1; line: 1, column: 1\]\) at character offset 21\."""))
+                    """Object \(start marker at \[Source: \(String\)\"\{\"ye\":1\"; line: 1, column: 1\]\) at character offset 21\."""))
     }
   }
 
   "Parsing invalid JSON" should {
     "should throw a ParsingException with an informative message" in {
       parse[CaseClass]("900").must(throwA[ParsingException](
-        ("""Can not deserialize instance of com.codahale.jerkson.tests.CaseClass out of VALUE_NUMBER_INT token\n""" +
-          """ at \[Source: 900; line: 1, column: 1\]""")))
+        ("""Cannot deserialize instance of \`com.codahale.jerkson.tests.CaseClass\` out of VALUE_NUMBER_INT token\n""" +
+          """ at \[Source: \(String\)\"900\"; line: 1, column: 1\]""")))
 
       parse[CaseClass]("{\"woo\": 1}").must(throwA[ParsingException]("""Invalid JSON. Needed \[id, name\], but found \[woo\]."""))
     }

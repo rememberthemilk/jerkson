@@ -2,18 +2,18 @@ name := "jerkson"
 
 organization := "com.codahale"
 
-scalaVersion := "2.12.1"
+scalaVersion := "2.12.4"
 
-version := "0.5.6"
+version := "0.6.0"
 
-val jacksonVersion = "2.8.8"
+val jacksonVersion = "2.9.2"
 
 libraryDependencies ++= Seq(
   "com.fasterxml.jackson.core" % "jackson-annotations" % jacksonVersion,
   "com.fasterxml.jackson.core" % "jackson-core" % jacksonVersion,
   "com.fasterxml.jackson.core" % "jackson-databind" % jacksonVersion,
   "com.fasterxml.jackson.module" % "jackson-module-afterburner" % jacksonVersion,
-  "org.specs2" %% "specs2-core" % "3.8.9" % "test"
+  "org.specs2" %% "specs2-core" % "4.0.1" % "test"
 )
 
 libraryDependencies += "org.scala-lang" % "scala-reflect" % scalaVersion.value
@@ -30,6 +30,6 @@ scalacOptions ++= Seq(
   "-language:higherKinds"
 )
 
-scalacOptions ++= Seq("-opt:l:method", "-opt:l:project", "-opt:l:classpath")
+scalacOptions ++= Seq("-opt:l:inline", "-opt-inline-from:com.codahale.**")
 
 scalacOptions in Test ++= Seq("-Yrangepos")
