@@ -3,17 +3,16 @@ package com.codahale.jerkson.deser
 import com.fasterxml.jackson.core.{JsonToken, JsonParser}
 import com.fasterxml.jackson.databind.JavaType
 import com.fasterxml.jackson.databind.{JsonDeserializer, DeserializationContext}
-import collection.generic.GenericCompanion
+import scala.collection.Factory
 import com.fasterxml.jackson.databind.deser.ResolvableDeserializer
 
-class SeqDeserializer[+CC[X] <: Traversable[X]](companion: GenericCompanion[CC],
-                                                elementType: JavaType)
+class SeqDeserializer[+CC[_] <: AnyRef](companion: Factory[Object, CC[Object]], elementType: JavaType)
   extends JsonDeserializer[Object] with ResolvableDeserializer {
 
   var elementDeserializer: JsonDeserializer[Object] = _
 
   def deserialize(jp: JsonParser, ctxt: DeserializationContext): CC[Object] = {
-    val builder = companion.newBuilder[Object]
+    val builder = companion.newBuilder
 
     if (jp.getCurrentToken != JsonToken.START_ARRAY) {
       throw ctxt.mappingException(elementType.getRawClass)
@@ -26,7 +25,7 @@ class SeqDeserializer[+CC[X] <: Traversable[X]](companion: GenericCompanion[CC],
     builder.result()
   }
 
-  def resolve(ctxt: DeserializationContext) {
+  def resolve(ctxt: DeserializationContext): Unit = {
     elementDeserializer = ctxt.findRootValueDeserializer(elementType)
   }
 

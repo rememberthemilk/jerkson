@@ -1,6 +1,6 @@
 package com.codahale.jerkson.deser
 
-import collection.JavaConversions._
+import collection.JavaConverters._
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.core.{JsonToken, JsonParser}
 import com.fasterxml.jackson.databind.{JsonMappingException, DeserializationContext, JsonDeserializer}
@@ -46,7 +46,7 @@ class RangeDeserializer extends JsonDeserializer[Object] {
 
   private def errorMessage(node: JsonNode) = {
     val existing = node match {
-      case obj: ObjectNode => obj.fieldNames.mkString("[", ", ", "]")
+      case obj: ObjectNode => obj.fieldNames.asScala.mkString("[", ", ", "]")
       case _: NullNode => "[]" // this is what Jackson deserializes the inside of an empty object to
       case unknown => "a non-object"
     }

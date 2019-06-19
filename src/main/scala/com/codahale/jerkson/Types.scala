@@ -2,7 +2,7 @@ package com.codahale.jerkson
 
 import com.fasterxml.jackson.databind.JavaType
 import com.fasterxml.jackson.databind.`type`.{TypeFactory, ArrayType}
-import scala.collection.JavaConversions.mapAsScalaConcurrentMap
+import scala.collection.JavaConverters.mapAsScalaConcurrentMap
 import java.util.concurrent.ConcurrentHashMap
 
 private[jerkson] object Types {

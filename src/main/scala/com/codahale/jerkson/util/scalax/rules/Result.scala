@@ -12,7 +12,7 @@
 
 package com.codahale.jerkson.util
 package scalax
-package rules;
+package rules
 
 /** Represents the combined value of two rules applied in sequence.
  *

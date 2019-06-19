@@ -1,11 +1,10 @@
 package com.codahale.jerkson.deser
 
-import scala.collection.generic.BitSetFactory
-import scala.collection.{BitSetLike, BitSet}
+import scala.collection.{BitSetOps, BitSet, SpecificIterableFactory}
 import com.fasterxml.jackson.databind.{DeserializationContext, JsonDeserializer}
 import com.fasterxml.jackson.core.{JsonToken, JsonParser}
 
-class BitSetDeserializer[Coll <: BitSet with BitSetLike[Coll]](factory: BitSetFactory[Coll])
+class BitSetDeserializer[Coll <: BitSet](factory: SpecificIterableFactory[Int, Coll])
   extends JsonDeserializer[Coll] {
 
   def deserialize(jp: JsonParser, ctxt: DeserializationContext) = {

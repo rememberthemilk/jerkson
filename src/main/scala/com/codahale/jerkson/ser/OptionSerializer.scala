@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.{SerializerProvider, JsonSerializer}
 
 class OptionSerializer extends JsonSerializer[Option[_]] {
   def serialize(value: Option[_], json: JsonGenerator,
-                provider: SerializerProvider) {
+                provider: SerializerProvider): Unit = {
     provider.defaultSerializeValue(value.orNull, json)
   }
 }

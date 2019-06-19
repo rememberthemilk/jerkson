@@ -24,7 +24,7 @@ class CaseClassSerializer[A <: Product](klass: Class[_]) extends JsonSerializer[
                                 .filter { _.getParameterTypes.isEmpty }
                                 .map { m => m.getName -> m }.toMap
   
-  def serialize(value: A, json: JsonGenerator, provider: SerializerProvider) {
+  def serialize(value: A, json: JsonGenerator, provider: SerializerProvider): Unit = {
     json.writeStartObject()
     for (field <- nonIgnoredFields) {
       val methodOpt = methods.get(field.getName)

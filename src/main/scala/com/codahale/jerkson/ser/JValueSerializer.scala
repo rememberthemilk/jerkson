@@ -6,7 +6,7 @@ import com.codahale.jerkson.AST._
 import java.math.BigInteger
 
 class JValueSerializer extends JsonSerializer[JValue] {
-  def serialize(value: JValue, json: JsonGenerator, provider: SerializerProvider) {
+  def serialize(value: JValue, json: JsonGenerator, provider: SerializerProvider): Unit = {
     value match {
       case JInt(v) => json.writeNumber(new BigInteger(v.toString()))
       case JFloat(v) => json.writeNumber(v)

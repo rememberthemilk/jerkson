@@ -1,11 +1,10 @@
 package com.codahale.jerkson.deser
 
-import com.fasterxml.jackson.databind._
-import scala.collection.{Traversable, MapLike, immutable, mutable}
 import com.codahale.jerkson.AST.{JNull, JValue}
-import scala.collection.generic.{MapFactory, GenericCompanion}
-import com.fasterxml.jackson.databind.deser.Deserializers
 import com.fasterxml.jackson.databind.Module.SetupContext
+import com.fasterxml.jackson.databind._
+import com.fasterxml.jackson.databind.deser.Deserializers
+import scala.collection._
 
 class ScalaDeserializers(classLoader: ClassLoader, context: SetupContext) extends Deserializers.Base {
   override def findBeanDeserializer(javaType: JavaType, config: DeserializationConfig,
@@ -21,20 +20,16 @@ class ScalaDeserializers(classLoader: ClassLoader, context: SetupContext) extend
                klass == classOf[Iterable[_]] || klass == classOf[Traversable[_]] ||
                klass == classOf[immutable.Traversable[_]]) {
       createSeqDeserializer(config, javaType, Seq)
-    } else if (klass == classOf[Stream[_]] || klass == classOf[immutable.Stream[_]]) {
-      createSeqDeserializer(config, javaType, Stream)
+    } else if (klass == classOf[LazyList[_]] || klass == classOf[immutable.LazyList[_]]) {
+      createSeqDeserializer(config, javaType, LazyList)
     } else if (klass == classOf[immutable.Queue[_]]) {
       createSeqDeserializer(config, javaType, immutable.Queue)
     } else if (klass == classOf[Vector[_]]) {
       createSeqDeserializer(config, javaType, Vector)
     } else if (klass == classOf[IndexedSeq[_]] || klass == classOf[immutable.IndexedSeq[_]]) {
       createSeqDeserializer(config, javaType, IndexedSeq)
-    } else if (klass == classOf[mutable.ResizableArray[_]]) {
-      createSeqDeserializer(config, javaType, mutable.ResizableArray)
     } else if (klass == classOf[mutable.ArraySeq[_]]) {
       createSeqDeserializer(config, javaType, mutable.ArraySeq)
-    } else if (klass == classOf[mutable.MutableList[_]]) {
-      createSeqDeserializer(config, javaType, mutable.MutableList)
     } else if (klass == classOf[mutable.Queue[_]]) {
       createSeqDeserializer(config, javaType, mutable.Queue)
     } else if (klass == classOf[mutable.ListBuffer[_]]) {
@@ -56,7 +51,7 @@ class ScalaDeserializers(classLoader: ClassLoader, context: SetupContext) extend
     } else if (klass == classOf[Iterator[_]] || klass == classOf[BufferedIterator[_]]) {
       val elementType = javaType.containedType(0)
       new IteratorDeserializer(elementType)
-    } else if (klass == classOf[immutable.HashMap[_, _]] || klass == classOf[Map[_, _]] || klass == classOf[collection.Map[_, _]]) {
+    } else if (klass == classOf[immutable.HashMap[_, _]] || klass == classOf[immutable.Map[_, _]] || klass == classOf[Map[_, _]]) {
       createImmutableMapDeserializer(config, javaType, immutable.HashMap)
     } else if (klass == classOf[immutable.IntMap[_]]) {
       val valueType = javaType.containedType(0)
@@ -93,11 +88,9 @@ class ScalaDeserializers(classLoader: ClassLoader, context: SetupContext) extend
     } else null
   }
 
-  private def createSeqDeserializer[CC[X] <: Traversable[X]](config: DeserializationConfig,
-                                                             javaType: JavaType,
-                                                             companion: GenericCompanion[CC]) = {
+  private def createSeqDeserializer[CC[_] <: AnyRef](config: DeserializationConfig, javaType: JavaType, companion: Factory[Object, CC[Object]]) = {
     val elementType = javaType.containedType(0)
-    new SeqDeserializer[CC](companion, elementType)
+    new SeqDeserializer(companion, elementType)
   }
 
   private def createOptionDeserializer(config: DeserializationConfig,
@@ -106,13 +99,11 @@ class ScalaDeserializers(classLoader: ClassLoader, context: SetupContext) extend
     new OptionDeserializer(elementType)
   }
 
-  private def createImmutableMapDeserializer[CC[A, B] <: Map[A, B] with MapLike[A, B, CC[A, B]]](config: DeserializationConfig,
-                                                                                        javaType: JavaType,
-                                                                                        companion: MapFactory[CC]) = {
+  private def createImmutableMapDeserializer[CC[_, _] <: AnyRef](config: DeserializationConfig, javaType: JavaType, companion: MapFactory[CC]) = {
     val keyType = javaType.containedType(0)
     val valueType = javaType.containedType(1)
     if (keyType.getRawClass == classOf[String]) {
-      new ImmutableMapDeserializer[CC](companion, valueType)
+      new ImmutableMapDeserializer(companion, valueType)
     } else if (keyType.getRawClass == classOf[Int] || keyType.getRawClass == classOf[java.lang.Integer]) {
       new IntMapDeserializer(valueType)
     } else if (keyType.getRawClass == classOf[Long] || keyType.getRawClass == classOf[java.lang.Long]) {

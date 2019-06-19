@@ -2,11 +2,11 @@ name := "jerkson"
 
 organization := "com.codahale"
 
-scalaVersion := "2.12.8"
+scalaVersion := "2.13.0"
 
 version := "0.6.0"
 
-val jacksonVersion = "2.9.8"
+val jacksonVersion = "2.9.9"
 
 libraryDependencies ++= Seq(
   "com.fasterxml.jackson.core" % "jackson-annotations" % jacksonVersion,

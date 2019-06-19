@@ -6,20 +6,6 @@ import scala.collection.mutable._
 import com.codahale.jerkson.ParsingException
 
 class MutableCollectionSupportSpec extends Specification {
-  "A mutable.ResizableArray[Int]" should {
-    "generates a JSON array of ints" in {
-      generate(ResizableArray(1, 2, 3)).must_==("[1,2,3]")
-    }
-
-    "is parsable from a JSON array of ints" in {
-      parse[ResizableArray[Int]]("[1,2,3]").must_==(ResizableArray(1, 2, 3))
-    }
-
-    "is parsable from an empty JSON array" in {
-      parse[ResizableArray[Int]]("[]").must_==(ResizableArray.empty[Int])
-    }
-  }
-
   "A mutable.ArraySeq[Int]" should {
     "generates a JSON array of ints" in {
       generate(ArraySeq(1, 2, 3)).must_==("[1,2,3]")
@@ -35,22 +21,6 @@ class MutableCollectionSupportSpec extends Specification {
     }
   }
 
-  "A mutable.MutableList[Int]" should {
-    val xs = new MutableList[Int]
-    xs ++= List(1, 2, 3)
-
-    "generates a JSON array" in {
-      generate(xs).must_==("[1,2,3]")
-    }
-
-    "is parsable from a JSON array of ints" in {
-      parse[MutableList[Int]]("[1,2,3]").must_==(xs)
-    }
-
-    "is parsable from an empty JSON array" in {
-      parse[MutableList[Int]]("[]").must_==(new MutableList[Int]())
-    }
-  }
 
   "A mutable.Queue[Int]" should {
     "generates a JSON array" in {

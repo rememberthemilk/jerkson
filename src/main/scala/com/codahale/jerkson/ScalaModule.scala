@@ -10,7 +10,7 @@ class ScalaModule(classLoader: ClassLoader) extends Module {
   def version = new Version(0, 6, 0, "SNAPSHOT", "com.codahale", "jerkson")
   def getModuleName = "jerkson"
 
-  def setupModule(context: SetupContext) {
+  def setupModule(context: SetupContext): Unit = {
     context.addDeserializers(new ScalaDeserializers(classLoader, context))
     context.addSerializers(new ScalaSerializers)
   }

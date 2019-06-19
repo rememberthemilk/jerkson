@@ -31,7 +31,7 @@ class MutableMapDeserializer(valueType: JavaType) extends JsonDeserializer[Objec
     builder.result()
   }
 
-  def resolve(ctxt: DeserializationContext) {
+  def resolve(ctxt: DeserializationContext): Unit = {
     valueDeserializer = ctxt.findRootValueDeserializer(valueType)
   }
 

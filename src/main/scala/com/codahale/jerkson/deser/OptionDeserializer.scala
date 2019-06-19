@@ -22,7 +22,7 @@ class OptionDeserializer(elementType: JavaType)
     }
   }
 
-  def resolve(ctxt: DeserializationContext) {
+  def resolve(ctxt: DeserializationContext): Unit = {
     elementDeserializer = ctxt.findRootValueDeserializer(elementType)
   }
 

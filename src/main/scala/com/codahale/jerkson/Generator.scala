@@ -16,30 +16,27 @@ trait Generator extends Factory {
   /**
    * Generate JSON from the given object and write to the given Writer.
    */
-  def generate[A](obj: A, output: Writer) {
+  def generate[A](obj: A, output: Writer): Unit =
     generate(obj, factory.createGenerator(output))
-  }
 
   /**
    * Generate JSON from the given object and write it to the given OutputStream.
    */
-  def generate[A](obj: A, output: OutputStream) {
+  def generate[A](obj: A, output: OutputStream): Unit =
     generate(obj, factory.createGenerator(output, JsonEncoding.UTF8))
-  }
 
   /**
    * Generate JSON from the given object and write it to the given File.
    */
-  def generate[A](obj: A, output: File) {
+  def generate[A](obj: A, output: File): Unit =
     generate(obj, factory.createGenerator(output, JsonEncoding.UTF8))
-  }
 
   /**
    * Returns true if the given class is serializable.
    */
   def canSerialize[A](implicit mf: Manifest[A]) = mapper.canSerialize(mf.runtimeClass)
 
-  private def generate[A](obj: A, generator: JsonGenerator) {
+  private def generate[A](obj: A, generator: JsonGenerator): Unit = {
     generator.writeObject(obj)
     generator.close()
   }

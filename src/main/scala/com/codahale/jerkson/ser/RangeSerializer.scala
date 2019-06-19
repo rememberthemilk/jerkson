@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonGenerator
 import com.fasterxml.jackson.databind.{SerializerProvider, JsonSerializer}
 
 class RangeSerializer extends JsonSerializer[Range] {
-  def serialize(value: Range, json: JsonGenerator, provider: SerializerProvider) {
+  def serialize(value: Range, json: JsonGenerator, provider: SerializerProvider): Unit = {
     json.writeStartObject()
     json.writeNumberField("start", value.start)
     json.writeNumberField("end", value.end)

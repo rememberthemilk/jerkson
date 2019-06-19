@@ -3,13 +3,10 @@ package com.codahale.jerkson.deser
 import com.fasterxml.jackson.databind.JavaType
 import com.fasterxml.jackson.databind.{DeserializationContext, JsonDeserializer}
 import com.fasterxml.jackson.core.{JsonToken, JsonParser}
-import collection.generic.MapFactory
-import collection.MapLike
+import collection.MapFactory
 import com.fasterxml.jackson.databind.deser.ResolvableDeserializer
 
-class ImmutableMapDeserializer[CC[A, B] <: Map[A, B] with MapLike[A, B, CC[A, B]]](companion: MapFactory[CC],
-                                                                          valueType: JavaType)
-  extends JsonDeserializer[Object] with ResolvableDeserializer {
+class ImmutableMapDeserializer[CC[_, _] <: AnyRef](companion: MapFactory[CC], valueType: JavaType) extends JsonDeserializer[Object] with ResolvableDeserializer {
 
   var valueDeserializer: JsonDeserializer[Object] = _
 
@@ -35,7 +32,7 @@ class ImmutableMapDeserializer[CC[A, B] <: Map[A, B] with MapLike[A, B, CC[A, B]
     builder.result()
   }
 
-  def resolve(ctxt: DeserializationContext) {
+  def resolve(ctxt: DeserializationContext): Unit = {
     valueDeserializer = ctxt.findRootValueDeserializer(valueType)
   }
 

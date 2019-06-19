@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.{SerializerProvider, JsonSerializer}
 
 class IteratorSerializer extends JsonSerializer[Iterator[_]] {
   def serialize(value: Iterator[_], json: JsonGenerator,
-                provider: SerializerProvider) {
+                provider: SerializerProvider): Unit = {
     json.writeStartArray()
     for (element <- value) {
       provider.defaultSerializeValue(element, json)

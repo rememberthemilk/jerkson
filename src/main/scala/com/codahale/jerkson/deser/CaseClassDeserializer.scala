@@ -1,6 +1,6 @@
 package com.codahale.jerkson.deser
 
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
 import scala.collection.mutable.ArrayBuffer
 import com.codahale.jerkson.JsonSnakeCase
 import com.codahale.jerkson.util._
@@ -74,7 +74,7 @@ class CaseClassDeserializer(config: DeserializationConfig,
   private def errorMessage(node: JsonNode) = {
     val names = params.map { _._1 }.mkString("[", ", ", "]")
     val existing = node match {
-      case obj: ObjectNode => obj.fieldNames.mkString("[", ", ", "]")
+      case obj: ObjectNode => obj.fieldNames.asScala.mkString("[", ", ", "]")
       case _: NullNode => "[]" // this is what Jackson deserializes the inside of an empty object to
       case unknown => "a non-object"
     }

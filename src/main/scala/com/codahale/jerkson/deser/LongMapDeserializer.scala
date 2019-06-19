@@ -34,7 +34,7 @@ class LongMapDeserializer(valueType: JavaType) extends JsonDeserializer[Object] 
     map
   }
 
-  def resolve(ctxt: DeserializationContext) {
+  def resolve(ctxt: DeserializationContext): Unit = {
     valueDeserializer = ctxt.findRootValueDeserializer(valueType)
   }
 

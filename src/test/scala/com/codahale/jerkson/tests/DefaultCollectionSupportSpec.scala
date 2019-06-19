@@ -1,8 +1,9 @@
 package com.codahale.jerkson.tests
 
-import org.specs2.mutable._
 import com.codahale.jerkson.Json._
 import com.codahale.jerkson.ParsingException
+import org.specs2.mutable._
+import scala.collection.BufferedIterator
 
 class DefaultCollectionSupportSpec extends Specification {
   "A Range" should {
@@ -172,17 +173,17 @@ class DefaultCollectionSupportSpec extends Specification {
     }
   }
 
-  "A Stream[Int]" should {
+  "A LazyList[Int]" should {
     "generates a JSON array" in {
-      generate(Stream(1, 2, 3)).must_==("[1,2,3]")
+      generate(LazyList(1, 2, 3)).must_==("[1,2,3]")
     }
 
     "is parsable from a JSON array of ints" in {
-      parse[Stream[Int]]("[1,2,3]").must_==(Stream(1, 2, 3))
+      parse[LazyList[Int]]("[1,2,3]").must_==(LazyList(1, 2, 3))
     }
 
     "is parsable from an empty JSON array" in {
-      parse[Stream[Int]]("[]").must_==(Stream.empty[Int])
+      parse[LazyList[Int]]("[]").must_==(LazyList.empty[Int])
     }
   }
 
@@ -200,17 +201,17 @@ class DefaultCollectionSupportSpec extends Specification {
     }
   }
 
-  "A Traversable[Int]" should {
+  "An Iterable[Int]" should {
     "generates a JSON array of ints" in {
-      generate(Seq(1, 2, 3).toTraversable).must_==("[1,2,3]")
+      generate(Seq(1, 2, 3).toIterable).must_==("[1,2,3]")
     }
 
     "is parsable from a JSON array of ints" in {
-      parse[Traversable[Int]]("[1,2,3]").toList.must_==(List(1, 2, 3))
+      parse[Iterable[Int]]("[1,2,3]").toList.must_==(List(1, 2, 3))
     }
 
     "is parsable from an empty JSON array" in {
-      parse[Traversable[Int]]("[]").toList.must_==(List.empty[Int])
+      parse[Iterable[Int]]("[]").toList.must_==(List.empty[Int])
     }
   }
 
