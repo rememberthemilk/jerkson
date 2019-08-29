@@ -1,12 +1,12 @@
 Jerkson
 -------
 
-Forked from https://github.com/codahale/jerkson to apply some fixes and compile on Scala 2.12.
+Forked from https://github.com/codahale/jerkson to apply some fixes and compile on Scala 2.13.
 
 Requirements
 ------------
 
-* Scala 2.12
+* Scala 2.13
 * Jackson 2.9.x
 
 
@@ -68,5 +68,7 @@ License
 -------
 
 Copyright (c) 2010-2011 Coda Hale
+
+Maintenance by Remember The Milk Inc.
 
 Published under The MIT License, see LICENSE
