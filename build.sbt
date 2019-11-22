@@ -6,7 +6,7 @@ scalaVersion := "2.13.1"
 
 version := "0.6.0"
 
-val jacksonVersion = "2.10.0"
+val jacksonVersion = "2.10.1"
 val jacksonDatabindVersion = jacksonVersion
 
 libraryDependencies ++= Seq(
@@ -14,7 +14,7 @@ libraryDependencies ++= Seq(
   "com.fasterxml.jackson.core" % "jackson-core" % jacksonVersion,
   "com.fasterxml.jackson.core" % "jackson-databind" % jacksonDatabindVersion,
   "com.fasterxml.jackson.module" % "jackson-module-afterburner" % jacksonVersion,
-  "org.specs2" %% "specs2-core" % "4.7.1" % "test"
+  "org.specs2" %% "specs2-core" % "4.8.1" % "test"
 )
 
 libraryDependencies += "org.scala-lang" % "scala-reflect" % scalaVersion.value
