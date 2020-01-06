@@ -6,7 +6,7 @@ scalaVersion := "2.13.1"
 
 version := "0.6.0"
 
-val jacksonVersion = "2.10.1"
+val jacksonVersion = "2.10.2"
 val jacksonDatabindVersion = jacksonVersion
 
 libraryDependencies ++= Seq(
