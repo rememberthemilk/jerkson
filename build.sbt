@@ -14,7 +14,7 @@ libraryDependencies ++= Seq(
   "com.fasterxml.jackson.core" % "jackson-core" % jacksonVersion,
   "com.fasterxml.jackson.core" % "jackson-databind" % jacksonDatabindVersion,
   "com.fasterxml.jackson.module" % "jackson-module-afterburner" % jacksonVersion,
-  "org.specs2" %% "specs2-core" % "4.8.1" % "test"
+  "org.specs2" %% "specs2-core" % "4.8.3" % "test"
 )
 
 libraryDependencies += "org.scala-lang" % "scala-reflect" % scalaVersion.value
