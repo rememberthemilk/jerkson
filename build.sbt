@@ -2,11 +2,11 @@ name := "jerkson"
 
 organization := "com.codahale"
 
-scalaVersion := "2.13.1"
+scalaVersion := "2.13.3"
 
 version := "0.6.0"
 
-val jacksonVersion = "2.10.3"
+val jacksonVersion = "2.11.2"
 val jacksonDatabindVersion = jacksonVersion
 
 libraryDependencies ++= Seq(
@@ -14,7 +14,7 @@ libraryDependencies ++= Seq(
   "com.fasterxml.jackson.core" % "jackson-core" % jacksonVersion,
   "com.fasterxml.jackson.core" % "jackson-databind" % jacksonDatabindVersion,
   "com.fasterxml.jackson.module" % "jackson-module-afterburner" % jacksonVersion,
-  "org.specs2" %% "specs2-core" % "4.9.2" % "test"
+  "org.specs2" %% "specs2-core" % "4.10.3" % "test"
 )
 
 libraryDependencies += "org.scala-lang" % "scala-reflect" % scalaVersion.value
